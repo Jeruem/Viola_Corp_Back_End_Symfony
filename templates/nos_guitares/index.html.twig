@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NosGuitares index{% endblock %}
+
+{% block body %}
+    <h1>NosGuitares index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nos_guitare in nos_guitares %}
+            <tr>
+                <td>{{ nos_guitare.id }}</td>
+                <td>{{ nos_guitare.title }}</td>
+                <td>{{ nos_guitare.description }}</td>
+                <td>{{ nos_guitare.image }}</td>
+                <td>
+                    <a href="{{ path('app_nos_guitares_show', {'id': nos_guitare.id}) }}">show</a>
+                    <a href="{{ path('app_nos_guitares_edit', {'id': nos_guitare.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nos_guitares_new') }}">Create new</a>
+{% endblock %}

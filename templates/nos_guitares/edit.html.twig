@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit NosGuitares{% endblock %}
+
+{% block body %}
+    <h1>Edit NosGuitares</h1>
+
+    {{ include('nos_guitares/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nos_guitares_index') }}">back to list</a>
+
+    {{ include('nos_guitares/_delete_form.html.twig') }}
+{% endblock %}
