@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Nosbasses;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class NosbassesType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('title')
+            ->add('description')
+            ->add('price')
+            ->add('image', FileType::class, [
+                'label' => 'Image (PNG, JPG, JPEG)',
+                'mapped' => false, // Cela signifie que ce champ ne sera pas directement lié à l'entité
+                'required' => false, // Le téléchargement d'image est optionnel
+            ]);
+
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Nosbasses::class,
+        ]);
+    }
+}

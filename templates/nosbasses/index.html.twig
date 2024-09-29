@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bass Card list{% endblock %}
+
+{% block body %}
+    <h1>Bass Card list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nosbass in nosbasses %}
+            <tr>
+                <td>{{ nosbass.id }}</td>
+                <td>{{ nosbass.title }}</td>
+                <td>{{ nosbass.description }}</td>
+                <td>{{ nosbass.price }}</td>
+                <td>{{ nosbass.image }}</td>
+                <td>
+                    <a href="{{ path('app_nosbasses_show', {'id': nosbass.id}) }}">show</a>
+                    <a href="{{ path('app_nosbasses_edit', {'id': nosbass.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nosbasses_new') }}">Create new</a>
+{% endblock %}

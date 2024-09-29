@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nosbasses{% endblock %}
+
+{% block body %}
+    <h1>Nosbasses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ nosbass.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ nosbass.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ nosbass.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ nosbass.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nosbasses_index') }}">back to list</a>
+
+    <a href="{{ path('app_nosbasses_edit', {'id': nosbass.id}) }}">edit</a>
+
+    {{ include('nosbasses/_delete_form.html.twig') }}
+{% endblock %}

@@ -17,6 +17,7 @@ class NosGuitaresType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
+            ->add('price')
             ->add('image', FileType::class, [
                 'label' => 'Image (PNG, JPG, JPEG)',
                 'mapped' => false, // Cela signifie que ce champ ne sera pas directement lié à l'entité

@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Price</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td>{{ nos_guitare.id }}</td>
                 <td>{{ nos_guitare.title }}</td>
                 <td>{{ nos_guitare.description }}</td>
+                <td>{{ nos_guitare.price }}</td>
                 <td>{{ nos_guitare.image }}</td>
                 <td>
                     <a href="{{ path('app_nos_guitares_show', {'id': nos_guitare.id}) }}">show</a>

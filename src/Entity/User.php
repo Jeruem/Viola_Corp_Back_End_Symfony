@@ -46,11 +46,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64)]
     private ?string $lastName = null;
 
-    /** @throws \Exception*/
+    // Ajout d'un champ pour savoir si l'utilisateur est administrateur
+    #[ORM\Column(type: 'boolean')]
+    private bool $isAdmin = false;
+
+    /** @throws \Exception */
     public function __construct()
     {
         $this->apiToken = bin2hex(random_bytes(20));
+        $this->createdAt = new \DateTimeImmutable(); // Initialise createdAt
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,8 +91,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // Assure-toi que chaque utilisateur a au moins le rôle USER
         $roles[] = 'ROLE_USER';
+
+        // Ajoute le rôle ADMIN si l'utilisateur est un administrateur
+        if ($this->isAdmin) {
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }
@@ -121,7 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // Si tu stockes des données temporaires, sensibles sur l'utilisateur, efface-les ici
         // $this->plainPassword = null;
     }
 
@@ -181,6 +192,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    // Nouvelle méthode pour vérifier si l'utilisateur est un administrateur
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    // Nouvelle méthode pour définir le statut d'administrateur
+    public function setIsAdmin(bool $isAdmin): static
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
